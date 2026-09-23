@@ -6,7 +6,7 @@ from asignacion import Notificador, ServicioAsignacion  # Clases del servicio a 
 # Verifica el flujo completo: Creado -> Asignado -> En camino -> Entregado
 def test_flujo_completo():
     p = Paquete("PKG-001")           # Crea un paquete nuevo
-    assert p.estado == "Creado" #"Asignado"       # Debe iniciar en Creado
+    assert p.estado == "Creado"  #""     # Debe iniciar en Creado
 
     p.asignar("REP-10")              # Asigna un repartidor
     assert p.estado == "Asignado"    # Debe pasar a Asignado

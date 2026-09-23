@@ -1,22 +1,32 @@
+# Workflow de Integración Continua (CI) para LogiExpress
 name: CI LogiExpress
 
+# Cuándo se ejecuta este workflow:
+# - push: cada vez que se suben commits a cualquier rama
+# - pull_request: cada vez que se abre o actualiza un Pull Request
 on:
   push:
   pull_request:
 
 jobs:
+  # Job que valida los estados del Paquete con tests unitarios
   test-estados-paquete:
+    # Máquina virtual Ubuntu donde se ejecutan los pasos
     runs-on: ubuntu-latest
     steps:
+      # 1. Clona el repositorio en la máquina virtual
       - uses: actions/checkout@v4
-      
+
+      # 2. Instala e configura Python 3.11 en el entorno
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
+      # 3. Instala las dependencias listadas en requirements.txt (ej. pytest)
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
+      # 4. Ejecuta los tests; si alguno falla, el workflow falla en rojo
       - name: Ejecutar tests OO del Paquete
         run: pytest -q
