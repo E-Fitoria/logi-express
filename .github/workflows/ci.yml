@@ -1,0 +1,22 @@
+name: CI LogiExpress
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-estados-paquete:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Ejecutar tests OO del Paquete
+        run: pytest -q
